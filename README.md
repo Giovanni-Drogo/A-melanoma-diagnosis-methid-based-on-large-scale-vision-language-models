@@ -1,73 +1,57 @@
 # CLIP-Based Melanoma Diagnosis (Reproduction)
 
-🔬 This project is a reproduction of the paper "A Melanoma Diagnosis Method Based on Large-Scale Vision-Language Models" published in Acta Anatomica Sinica (2025). The original work proposes a CLIP-based framework enhanced with clinical prompt guidance and partial image encoder fine-tuning for melanoma classification from dermoscopic images.
+🔬 This project is a reproduction of the paper **"A Melanoma Diagnosis Method Based on Large-Scale Vision-Language Models"** published in *Acta Anatomica Sinica* (2025). The original work proposes a CLIP-based framework enhanced with clinical prompt guidance and partial image encoder fine-tuning for melanoma classification from dermoscopic images.
 
-📁 Project Structure
+---
+
+## 📁 Project Structure
 .
-├── main.py                          # Main training entry (full model)
-├── main_woIft.py                    # Ablation: Baseline + Clinical Guidance (w/o IFT)
-├── main_wocg.py                     # Ablation: Baseline + IFT (w/o Clinical Guidance)
-├── main_woIft_cg.py                 # Ablation: Baseline (CoOp only)
-├── main_kgcoop.py                   # Comparison: KgCoOp method
-├── test.py                          # Test entry for Derm7pt
-├── test_v2.py                       # Test entry for PH2
-├── data.py                          # Data loading & preprocessing
+├── main.py # Main training entry (full model)
+├── main_woIft.py # Ablation: Baseline + Clinical Guidance (w/o IFT)
+├── main_wocg.py # Ablation: Baseline + IFT (w/o Clinical Guidance)
+├── main_woIft_cg.py # Ablation: Baseline (CoOp only)
+├── main_kgcoop.py # Comparison: KgCoOp method
+├── test.py # Test entry for Derm7pt
+├── test_v2.py # Test entry for PH2
+├── data.py # Data loading & preprocessing
 ├── promptCustom/
-│   ├── context_guided_coop.py       # Clinical-guided context optimization (core)
-│   ├── prompt_tuning.py             # Prompt learning module
-│   ├── prompt_test.py               # Prompt loading during testing
-│   ├── clip.py                      # CLIP model loader
-│   └── simple_tokenizer.py          # Text tokenizer
-├── train.sh                         # Training script
-├── test.sh                          # Testing script
-└── requirements.txt                 # Python dependencies
+│ ├── context_guided_coop.py # Clinical-guided context optimization (core)
+│ ├── prompt_tuning.py # Prompt learning module
+│ ├── prompt_test.py # Prompt loading during testing
+│ ├── clip.py # CLIP model loader
+│ └── simple_tokenizer.py # Text tokenizer
+├── train.sh # Training script
+├── test.sh # Testing script
+└── requirements.txt # Python dependencies
 
-🧩Model Features
-1. Clinical-guided Context Optimization (CgCoOp)
-Uses 7-point checklist to construct fixed clinical prompts that guide learnable prompts
+---
 
-Introduces cosine similarity loss to align text features with clinical features
+## 🧩 Model Features
 
-2. Partial Image Encoder Fine-tuning (IFT)
-Only fine-tunes the last layer of visual encoder (visual.ln_post)
+### 1. Clinical-guided Context Optimization (CgCoOp)
+- Uses 7-point checklist to construct fixed clinical prompts that guide learnable prompts
+- Introduces cosine similarity loss to align text features with clinical features
 
-Preserves general visual features while adapting to medical domain
+### 2. Partial Image Encoder Fine-tuning (IFT)
+- Only fine-tunes the last layer of visual encoder (`visual.ln_post`)
+- Preserves general visual features while adapting to medical domain
+- Reduces overfitting and improves generalization
 
-Reduces overfitting and improves generalization
+---
 
-🛠️ Environment Setup
-Verified Environment:
+## 🛠️ Environment Setup
 
-PyTorch 2.4.1 + CUDA 12.1
+**Verified Environment:**
+- PyTorch 2.4.1 + CUDA 12.1
+- NVIDIA A10 GPU
 
-NVIDIA A10 GPU
+---
 
-🚀 Training & Testing
+## 🚀 Training & Testing
 
+### Training
+```bash
 bash train.sh
-
-Key parameters (set in train.sh):
-
-lr_src=0.03 (learning rate for text prompts)
-
-lr_ft=5e-5 (learning rate for image encoder)
-
-batchsize=128
-
-arch=ViT-B/16
-
-dataset=derm7pt
-
-seed=2024 (options: 2024, 2025, 2026)
-
-Testing:
-Set in test.sh:
-
-prompt_path: trained prompt model (e.g., prompt_model_90.pt)
-
-clip_path: fine-tuned image encoder (e.g., Image_encoder_tuning90.pt)
-
-dataset: derm7pt or PH2
 
 📊 Reproduction Results
 On Derm7pt test set, this reproduction achieves:
