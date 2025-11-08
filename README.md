@@ -63,21 +63,19 @@ Plans to upload via Git LFS or other large file storage solutions
 
 ## 🚀 Training & Testing
 
-### Training
-```bash
-bash train.sh
+-bash train.sh
 
-📊 Reproduction Results
-On Derm7pt test set, this reproduction achieves:
+## 📊 Reproduction Results
+On **Derm7pt** test set, this reproduction achieves:
 
-Accuracy (ACC)	AUC	F1-score
-82.53%	85.08%	81.19%
-Best model saved at epoch 90, showing comparable performance to original paper.
+- Accuracy (ACC)	AUC	F1-score
+- 82.53%	85.08%	81.19%
+- Best model saved at epoch 90, showing comparable performance to original paper.
 
-🧪 Experiments
-Main Experiment: main.py (full model)
+## 🧪 Experiments
+- **Main Experiment**: main.py (full model)
 
-Ablation Studies:
+- **Ablation Studies**:
 
 main_woIft.py: without image fine-tuning
 
@@ -87,17 +85,17 @@ main_woIft_cg.py: CoOp baseline only
 
 Comparison: main_kgcoop.py (KgCoOp method)
 
-📁 Model Files
+## 📁 Model Files
 After training, the following files are saved:
 
 prompt_model_90.pt: text prompt model
 
 Image_encoder_tuning90.pt: image encoder model
 
-🙏 Acknowledgments
+## 🙏 Acknowledgments
 Thanks to the original authors from Fudan University for providing code and methodology.
 
 This reproduction is based on the original paper for academic validation and further research.
 
-📜 License
+## 📜 License
 This project is for academic research only. Please follow the original paper and dataset licenses for data and code usage.
