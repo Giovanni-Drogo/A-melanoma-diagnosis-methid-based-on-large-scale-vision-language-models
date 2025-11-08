@@ -1,0 +1,13 @@
+训练完成确认：
+- 项目：CLIP皮肤病分类模型复现
+- 状态：成功完成训练
+- 最佳epoch：第90轮
+- 最佳准确率：0.8253
+- 总训练轮数：96轮
+- 数据集：Derm7pt
+- 模型保存位置：/mnt/workspace/Clip/Clip_prompt/sava/seed11/
+- 环境：Conda (clip_melanoma), PyTorch + CUDA
+
+关键文件：
+- prompt_model_90.pt (文本提示模型)
+- Image_encoder_tuning90.pt (图像编码器模型)
